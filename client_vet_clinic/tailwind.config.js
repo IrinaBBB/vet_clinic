@@ -1,17 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    content: ["./index.html", './src/**/*.{js,jsx,ts,tsx}'],
+    mode: "jit",
     theme: {
         extend: {
             colors: {
-                primary: '#00040f',
-                secondary: '#00f6ff',
+                primary: '#36cf0c',
+                secondary: '#5cf232',
+                tertiary: '#d1fbc5',
+                background: '#efefef',
                 dimWhite: 'rgba(255, 255, 255, 0.7)',
                 dimBlue: 'rgba(9, 151, 124, 0.1)',
+                white: '#f5fef3'
             },
-            // fontFamily: {
-            //     poppins: ["Poppins", "sans-serif"],
-            // },
+            fontFamily: {
+                montserrat: ["Montserrat", "sans-serif"],
+            },
+        },
+        screens: {
+            xs: "480px",
+            ss: "620px",
+            sm: "768px",
+            md: "1060px",
+            lg: "1200px",
+            xl: "1700px",
         },
     },
     plugins: [],
