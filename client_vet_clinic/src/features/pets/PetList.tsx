@@ -59,6 +59,27 @@ function PetList() {
                     </tbody>
                 </table>
             </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+                {pets.map((pet) => (
+                    <div className="bg-white p-4 rounded-lg shadow bg-gradient-to-tr from-white to-blue-100">
+                        <div className="flex items-center">
+                            <img
+                                src={logo_dark}
+                                alt="pet image"
+                                className="w-20 bg-blue-100 p-1 rounded-full ms-7 sm:ms-3 me-7"
+                            />
+                            <div>
+                                <div className="text-blue-800 mb-2 text-center uppercase font-bold py-1 px-2 bg-blue-200 rounded-full">{pet.name}</div>
+                                <div className="uppercase mb-1">{pet.species}</div>
+                                <div className="uppercase mb-1">{pet.sex}</div>
+                                <div className="uppercase mb-1">{pet.neutered ? 'yes' : 'no'}</div>
+                                <div className="uppercase mb-1">{pet.dateOfBirth}</div>
+                                <div className="uppercase mb-1">{pet.weight} kg</div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
             <Pagination />
         </>
     )
