@@ -1,10 +1,14 @@
 import './index.css'
-import LoginForm from "./app/features/LoginForm.tsx";
+import Navbar from './app/layout/Navbar.tsx'
+import PetList from './features/pets/PetList.tsx'
 
 function App() {
     return (
         <>
-            <LoginForm/>
+            <Navbar />
+            <div className="container mt-7 mx-auto">
+                <PetList />
+            </div>
         </>
     )
 }

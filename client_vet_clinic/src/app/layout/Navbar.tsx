@@ -6,7 +6,7 @@ function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
         <>
-            <div className="flex items-center bg-blue-900 py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-start">
+            <div className="flex items-center bg-blue-800 py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-start">
                 <img src={logo_light} alt="logo" className={`h-10 w-10 mr-5`} />
                 <ul className="hidden sm:flex">
                     {navLinks.map((link: NavLink) => (
@@ -36,7 +36,7 @@ function Navbar() {
                 {navLinks.map((link: NavLink) => (
                     <li
                         key={link.id}
-                        className="text-gray-500 text-xl p-3 first:pt-6 last:pb-6 cursor-pointer hover:text-gray-400"
+                        className="text-blue-800 text-xl p-3 first:pt-6 last:pb-6 cursor-pointer hover:text-blue-700"
                     >
                         {link.title}
                     </li>
