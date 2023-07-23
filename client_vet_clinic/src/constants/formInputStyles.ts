@@ -1,9 +1,9 @@
 // General styles
 const paddingX = '10'
 const paddingY = '3'
-const inputBackgroundColor = 'bg-blue-50'
+const inputBackgroundColor = 'bg-white'
 const border = 'border-b-[2px] border-t-[2px] border-s-[2px] border-e-[2px]'
-const borderColor = 'border-transparent'
+const borderColor = 'border-indigo-700'
 const rounded = 'rounded-full'
 
 

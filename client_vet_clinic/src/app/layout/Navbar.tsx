@@ -1,6 +1,7 @@
 import { logo_light, menu } from '../../assets'
-import { NavLink, navLinks } from '../../constants'
+import { NavigationLink, navLinks } from '../../constants'
 import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -14,24 +15,26 @@ function Navbar() {
                         className={`h-10 w-10 mr-5 hover:animate-pulse cursor-pointer`}
                     />
                     <ul className="hidden sm:flex">
-                        {navLinks.map((link: NavLink) => (
-                            <li
+                        {navLinks.map((link: NavigationLink) => (
+                            <NavLink
+                                to={link.path}
                                 key={link.id}
                                 className="mr-4 pb-1 py-1 last:mr-0 border-b-2
                         border-b-transparent hover:border-b-2 hover:border-white cursor-pointer ease-in duration-300"
                             >
                                 {link.title}
-                            </li>
+                            </NavLink>
                         ))}
                     </ul>
                 </div>
-                <ul>
-                    <li
+                <ul className="hidden sm:flex">
+                    <NavLink
+                        to="/login"
                         className="mr-4 place-self-end pb-1 py-1 last:mr-0 border-b-2
                         border-b-transparent hover:border-b-2 hover:border-white cursor-pointer ease-in duration-300"
                     >
                         Log out
-                    </li>
+                    </NavLink>
                 </ul>
                 <img
                     src={menu}
@@ -48,14 +51,17 @@ function Navbar() {
                     menuOpen ? 'max-h-[1000px]' : 'max-h-0'
                 }`}
             >
-                {navLinks.map((link: NavLink) => (
+                {navLinks.map((link: NavigationLink) => (
                     <li
                         key={link.id}
                         className="text-gray-700 tracking-wider text-xl p-3 first:pt-6 last:pb-6 cursor-pointer hover:text-gray-600"
                     >
-                        <span className="bg-gradient-to-r from-violet-700 to-blue-700 text-white py-2 px-10 rounded-full">
+                        <Link
+                            to={link.path}
+                            className="bg-gradient-to-r from-violet-700 to-blue-700 text-white py-2 px-10 rounded-full"
+                        >
                             {link.title}
-                        </span>
+                        </Link>
                     </li>
                 ))}
             </ul>

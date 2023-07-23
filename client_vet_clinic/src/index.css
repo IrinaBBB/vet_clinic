@@ -17,13 +17,8 @@ body {
 }
 
 
-.bg-nav-gradient {
-    background: linear-gradient(
-            144.39deg,
-            #30b80b,
-            #3adf0d,
-            #38d70c
-    );
+.active{
+    @apply border-b-2 border-white;
 }
 
 .bg-blue-gradient {

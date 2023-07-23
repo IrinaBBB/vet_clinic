@@ -1,16 +1,19 @@
-export interface NavLink {
+export interface NavigationLink {
     id: string
     title: string
+    path: string
 }
 
-export const navLinks = [
+export const navLinks: NavigationLink[] = [
     {
         id: 'vets',
         title: 'Vets',
+        path: '/vets'
     },
     {
         id: 'pets',
         title: 'Pets',
+        path: '/'
     },
 ]
 
