@@ -1,10 +1,10 @@
 import './index.css'
-import LoginForm from './app/features/LoginForm.tsx'
+import LoginForm from "./app/features/LoginForm.tsx";
 
 function App() {
     return (
         <>
-            <LoginForm />
+            <LoginForm/>
         </>
     )
 }

@@ -1,12 +1,16 @@
-import { logo_dark } from '../../assets'
+import { hide, logo_dark, view } from '../../assets'
 import { stylesInputField } from '../../constants/formInputStyles.ts'
+import { useState } from 'react'
 
 function LoginForm() {
+    const [showPassword, setShowPassword] = useState(false)
     return (
         <>
             <div className="flex items-center justify-center w-full h-[100vh] bg-blue-gradient">
-                <form className="flex flex-col w-[100%] h-full ss:h-fit ss:w-[80%] md:w-[40%] items-center
-                    bg-white p-10 rounded-[4px] shadow-md shadow-slate-800 opacity-[85%]">
+                <form
+                    className="flex flex-col w-[100%] h-full ss:h-fit ss:w-[80%] md:w-[40%] items-center
+                    bg-white p-10 rounded-[4px] shadow-md shadow-slate-800 opacity-[85%]"
+                >
                     <img
                         src={logo_dark}
                         alt="logo"
@@ -16,7 +20,7 @@ function LoginForm() {
                         <input
                             type="text"
                             placeholder="Enter your login name"
-                            className={`peer rounded w-full ${stylesInputField}`}
+                            className={`peer w-full ${stylesInputField}`}
                             required
                         />
                         <label
@@ -25,14 +29,22 @@ function LoginForm() {
                             Login
                         </label>
                     </div>
-                    <div className="w-full text-center font-montserrat mt-3">
+                    <div className="w-full text-center font-montserrat mt-3 relative">
                         <input
-                            type="password"
+                            type={`${showPassword ? 'text' : 'password'}`}
                             placeholder="Enter your password"
-                            className={`peer rounded w-full ${stylesInputField}`}
+                            className={`peer w-full ${stylesInputField}`}
                             required
                         />
-                        <label className={`text-gray-500 text-start ms-10 block`}>
+                        <img
+                            src={showPassword ? view : hide}
+                            alt="icon view password"
+                            className="w-[32px] cursor-pointer absolute top-2.5 right-5"
+                            onClick={() => setShowPassword(!showPassword)}
+                        />
+                        <label
+                            className={`text-gray-500 text-start ms-10 block`}
+                        >
                             Password
                         </label>
                     </div>
