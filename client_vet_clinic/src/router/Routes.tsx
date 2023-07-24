@@ -3,6 +3,8 @@ import App from '../App.tsx'
 import LoginForm from '../app/features/LoginForm.tsx'
 import PetList from '../features/pets/PetList.tsx'
 import VetList from '../features/vets/VetList.tsx'
+import PetDetails from "../features/pets/PetDetails.tsx";
+import PetForm from "../features/pets/PetForm.tsx";
 
 export const routes: RouteObject[] = [
     {
@@ -11,6 +13,8 @@ export const routes: RouteObject[] = [
         children: [
             { path: '', element: <PetList /> },
             { path: 'vets', element: <VetList /> },
+            { path: 'pet-details', element: <PetDetails /> },
+            { path: 'pet-form', element: <PetForm /> },
         ],
     },
     {

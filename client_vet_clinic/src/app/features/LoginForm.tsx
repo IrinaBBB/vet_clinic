@@ -6,7 +6,7 @@ function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
     return (
         <>
-            <div className="flex items-center justify-center w-full h-[100vh] bg-gradient-to-r from-indigo-700 to-blue-700">
+            <div className="flex items-center justify-center w-full h-[100vh] bg-gradient-to-r from-sky-500 to-indigo-500">
                 <form
                     className="flex flex-col w-[100%] h-full ss:h-fit ss:w-[80%] md:w-[40%] items-center
                     bg-white p-10 rounded-[4px] shadow-md shadow-slate-800 opacity-[90%]"
