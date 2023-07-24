@@ -7,7 +7,7 @@ function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
         <>
-            <div className="flex w-full items-center bg-gradient-to-r from-indigo-700 to-blue-700  py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-between">
+            <div className="flex w-full items-center bg-gradient-to-r from-indigo-700 to-blue-700 py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-between">
                 <div className="flex">
                     <img
                         src={logo_light}

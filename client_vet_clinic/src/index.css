@@ -21,6 +21,26 @@ body {
     @apply border-b-2 border-white;
 }
 
+.polygon {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+
+.card-background {
+    background-image: linear-gradient(60deg, rgba(230, 230, 255, 0.90),rgba(250, 250, 255, 0.90), rgba(255, 255, 255, 0.90)), url("./assets/vet-dark.svg");
+    background-repeat: no-repeat;
+    background-position-x: -35%;
+    background-position-y: -60%;
+}
+
+@media (max-width: 1060px) {
+    .card-background {
+        background-image: linear-gradient(60deg, rgba(225, 225, 255, 0.95), rgba(255, 255, 255, 0.60));
+        background-repeat: no-repeat;
+        background-position-x: -35%;
+        background-position-y: -60%;
+    }
+}
+
 .bg-blue-gradient {
     background: linear-gradient(
             157.81deg,

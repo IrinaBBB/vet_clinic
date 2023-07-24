@@ -39,7 +39,7 @@ function Carousel({
                     <img
                         src={image}
                         alt="image"
-                        className={`min-w-[400px] h-[500px] object-cover`}
+                        className={`min-w-[300px] h-[400px] object-cover`}
                     />
                 ))}
             </div>
