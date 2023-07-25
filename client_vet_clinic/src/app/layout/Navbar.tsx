@@ -64,6 +64,17 @@ function Navbar() {
                         </Link>
                     </li>
                 ))}
+                <li
+                    key='logout'
+                    className="text-gray-700 tracking-wider text-xl p-3 first:pt-6 last:pb-6 cursor-pointer hover:text-gray-600"
+                >
+                    <Link
+                        to='/login'
+                        className="bg-gradient-to-r from-violet-700 to-blue-700 text-white py-2 px-10 rounded-full"
+                    >
+                        Logout
+                    </Link>
+                </li>
             </ul>
         </>
     )

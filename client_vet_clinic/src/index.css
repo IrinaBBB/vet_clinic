@@ -17,7 +17,7 @@ body {
 }
 
 
-.active{
+.active {
     @apply border-b-2 border-white;
 }
 
@@ -26,7 +26,7 @@ body {
 }
 
 .card-background {
-    background-image: linear-gradient(60deg, rgba(230, 230, 255, 0.90),rgba(250, 250, 255, 0.90), rgba(255, 255, 255, 0.90)), url("./assets/vet-dark.svg");
+    background-image: linear-gradient(60deg, rgba(230, 230, 255, 0.90), rgba(250, 250, 255, 0.90), rgba(255, 255, 255, 0.90)), url("./assets/vet-dark.svg");
     background-repeat: no-repeat;
     background-position-x: -35%;
     background-position-y: -60%;
@@ -91,4 +91,19 @@ body {
         transform: translateY(0px);
     }
 }
+
+
+/** FORMS */
+/*input:focus, input:focus-visible, select:focus-visible {*/
+/*    @apply focus-visible:bg-slate-100 outline-none border-none ring-amber-100 ring-2;*/
+/*}*/
+
+/*input.invalid {*/
+/*    @apply focus-visible:bg-slate-100 outline-none border-none ring-red-500 bg-red-300 ring-2;*/
+/*}*/
+
+
+
+
+
 

@@ -10,12 +10,12 @@ const rounded = 'rounded-full'
 const generalStyles = `placeholder:text-gray-400 px-${paddingX} py-${paddingY} ${inputBackgroundColor} ${border} ${borderColor} ${rounded}`
 const stylesFocus = `focus:outline-0 focus:ring-0 
     focus:${border} 
-    focus:bg-blue-100
-    focus:border-s-indigo-700 focus:border-t-indigo-700 focus:border-e-indigo-700 focus:border-b-indigo-700`
+    focus:bg-blue-white
+    focus:border-s-indigo-900 focus:border-t-indigo-900 focus:border-e-indigo-900 focus:border-b-indigo-900`
 const stylesVisibleFocus = `focus-visible:outline-0 focus-visible:ring-0 
     focus-visible:${border} 
-    focus-visible:bg-blue-100
-    focus-visible:border-s-indigo-700 focus-visible:border-t-indigo-700 focus-visible:border-e-indigo-700 focus-visible:border-b-indigo-700`
+    focus-visible:bg-blue-white
+    focus-visible:border-s-indigo-900 focus-visible:border-t-indigo-900 focus-visible:border-e-indigo-900 focus-visible:border-b-indigo-900`
 
 // const invalidBorder =`invalid:bg-red-100 invalid:border-s-transparent
 //                 invalid:border-t-transparent invalid:border-e-transparent invalid:border-b-red-500`

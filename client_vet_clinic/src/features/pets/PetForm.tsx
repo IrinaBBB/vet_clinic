@@ -8,7 +8,7 @@ function PetForm() {
                     <input
                         type="text"
                         placeholder="Enter pet name"
-                        className={`peer w-full ${stylesInputField}`}
+                        className={`peer w-full ${stylesInputField} invalid`}
                         required
                     />
                     <label className={`text-gray-500 text-start ms-10 block`}>
