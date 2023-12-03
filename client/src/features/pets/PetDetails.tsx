@@ -1,5 +1,5 @@
-import Carousel from '../../components/Carousel.tsx'
-import { pets, slides } from '../../constants'
+import Carousel from '../../app/components/Carousel.tsx'
+import { pets, slides } from '../../app/constants'
 import {deleteIcon, edit} from "../../assets";
 import {Link} from "react-router-dom";
 

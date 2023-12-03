@@ -1,5 +1,5 @@
 import { logo_light, menu } from '../../assets'
-import { NavigationLink, navLinks } from '../../constants'
+import { NavigationLink, navLinks } from '../constants'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 

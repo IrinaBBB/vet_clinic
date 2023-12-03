@@ -1,4 +1,4 @@
-import { stylesInputField } from '../../constants/formInputStyles.ts'
+import { stylesInputField } from '../../app/constants/formInputStyles.ts'
 
 function PetForm() {
     return (

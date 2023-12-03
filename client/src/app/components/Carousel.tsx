@@ -1,4 +1,4 @@
-import { arrow } from '../assets'
+import { arrow } from '../../assets'
 import { useEffect, useState } from 'react'
 
 function Carousel({

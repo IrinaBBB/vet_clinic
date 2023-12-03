@@ -1,5 +1,5 @@
-import { hide, logo_dark, view } from '../../assets'
-import { stylesInputField } from '../../constants/formInputStyles.ts'
+import { hide, logo_dark, view } from '../assets'
+import { stylesInputField } from '../app/constants/formInputStyles.ts'
 import { useState } from 'react'
 
 function LoginForm() {

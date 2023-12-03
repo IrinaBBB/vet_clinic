@@ -1,5 +1,5 @@
 import { logo_dark } from '../../assets'
-import { pets } from '../../constants'
+import { pets } from '../../app/constants'
 import Pagination from '../../app/layout/Pagination.tsx'
 import { Link } from 'react-router-dom'
 
