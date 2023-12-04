@@ -9,7 +9,7 @@ function PetList() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/animals')
+        fetch('http://localhost:5002/api/animals')
             .then((response) => response.json())
             .then((data) => setAnimals(data))
     }, [])
@@ -48,14 +48,14 @@ function PetList() {
                         {animals.map((animal) => (
                             <tr
                                 onClick={() => handleClick(animal.id)}
-                                className="even:bg-white odd:bg-gray-100 hover:bg-blue-100"
+                                className="even:bg-white odd:bg-gray-100 hover:bg-indigo-50"
                                 key={animal.id}
                             >
                                 <td className="p-3 text-sm text-gray-700 whitespace-nowrap flex justify-center">
                                     <img
                                         src={logo_dark}
                                         alt="pet"
-                                        className="w-16 bg-blue-100 p-1 rounded-full"
+                                        className="w-16 bg-indigo-50 border-[1px] border-indigo-600 p-1 rounded-full"
                                     />
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
