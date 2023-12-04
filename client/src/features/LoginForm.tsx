@@ -1,60 +1,91 @@
-import { hide, logo_dark, view } from '../assets'
-import { stylesInputField } from '../app/constants/formInputStyles.ts'
-import { useState } from 'react'
+// import { hide, logo_dark, view } from '../assets'
+// import { stylesInputField } from '../app/constants/formInputStyles.ts'
+// import { useState } from 'react'
+
+import {logo_dark, logo_light} from "../assets";
 
 function LoginForm() {
-    const [showPassword, setShowPassword] = useState(false)
+    //const [showPassword, setShowPassword] = useState(false)
     return (
-        <>
-            <div className="flex items-center justify-center w-full bg-cover bg-bottom h-[100vh] bg-[url('/src/assets/bg-image.jpg')]">
-                <div className="absolute col-start-1 row-start-1 bg-gradient-to-r from-indigo-900/60 to-indigo-900/60 w-screen h-screen"></div>
-                <form
-                    className="flex flex-col w-[100%] h-full ss:h-fit ss:w-[80%] md:w-[40%] items-center
-                    bg-white p-10 rounded-[4px] shadow-md shadow-slate-800 opacity-[90%]"
-                >
-                    <img
-                        src={logo_dark}
-                        alt="logo"
-                        className={`w-[100px] mb-6`}
-                    />
-                    <div className="w-full text-center font-montserrat mt-3">
-                        <input
-                            type="text"
-                            placeholder="Enter your login name"
-                            className={`peer w-full ${stylesInputField}`}
-                            required
-                        />
-                        <label
-                            className={`text-gray-500 text-start ms-10 block`}
+        <div className="grid grid-cols-2">
+            <div className="flex items-center justify-center bg-cover bg-bottom h-[100vh] bg-[url('/src/assets/bg-image.jpg')]">
+                <div className="absolute col-start-1 row-start-1 bg-gradient-to-r from-indigo-900/90 to-indigo-900/90 w-1/2 h-screen"></div>
+                <img src={logo_light} alt="logo" className="z-10 w-1/2 opacity-60"/>
+            </div>
+            <div className="z-10 px-8 bg-indigo-100 md:px-32 lg:px-24 flex flex-col justify-center">
+                <form className="bg-white rounded-md shadow-2xl p-5 text-center">
+                    <img src={logo_dark} alt="logo" className="w-1/6 mx-auto"/>
+                    <p className="text-sm font-normal text-indigo-700 mb-3">
+                        VetClinic
+                    </p>
+                    <h1 className="text-gray-800 font-normal uppercase text-3xl mb-4 tracking-wider">
+                        Login
+                    </h1>
+                    <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
                         >
-                            Login
-                        </label>
-                    </div>
-                    <div className="w-full text-center font-montserrat mt-3 relative">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                            />
+                        </svg>
                         <input
-                            type={`${showPassword ? 'text' : 'password'}`}
-                            placeholder="Enter your password"
-                            className={`peer w-full ${stylesInputField}`}
-                            required
+                            id="email"
+                            className=" pl-2 w-full outline-none border-none"
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
                         />
-                        <img
-                            src={showPassword ? view : hide}
-                            alt="icon view password"
-                            className="w-[32px] cursor-pointer absolute top-2.5 right-5"
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                        <label
-                            className={`text-gray-500 text-start ms-10 block`}
-                        >
-                            Password
-                        </label>
                     </div>
-                    <button className="bg-blue-800 px-10 py-2 mt-3 rounded text-white uppercase w-full hover:bg-blue-700 transition-all duration-300">
+                    <div className="flex items-center border-2 mb-12 py-2 px-3 rounded-2xl ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 text-gray-400"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                        <input
+                            className="pl-2 w-full outline-none border-none"
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="block w-full bg-indigo-800 mt-5 py-2 rounded-xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
+                    >
                         Login
                     </button>
+                    <div className="flex justify-between mt-4">
+                            <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
+                                Forgot Password ?
+                            </span>
+
+                        <a
+                            href="#"
+                            className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+                        >
+                            Don't have an account yet?
+                        </a>
+                    </div>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 
