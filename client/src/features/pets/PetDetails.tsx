@@ -1,59 +1,65 @@
-import Carousel from '../../app/components/Carousel.tsx'
-import {pets, slides} from '../../app/constants'
-import {deleteIcon, edit} from "../../assets";
-import {Link} from "react-router-dom";
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Animal } from '../../app/models/animal.ts'
+import axios from 'axios'
+import { deleteIcon, edit, logo_dark } from '../../assets'
+// import {deleteIcon, edit} from "../../assets";
+// import {Link} from "react-router-dom";
 
 function PetDetails() {
+    const { id } = useParams<{ id: string }>()
+    const [animal, setAnimal] = useState<Animal | null>(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/api/animals/${id}`)
+            .then((response) => setAnimal(response.data))
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false))
+    }, [id])
+
+    if (loading) return <h3>Loading...</h3>
+    if (!animal) return <h3>Pet not found</h3>
     return (
-        <div
-            className="font-montserrat card-background flex-col mb-8 md:flex-row flex w-full bg-white shadow rounded-xl px-4 py-2 md:px-16 md:py-10">
-            <div className="flex-auto flex flex-col py-8 md:py-16 items-center justify-between">
-                <div
-                    className="text-white text-[40px] bg-gradient-to-r from-indigo-700 to-blue-700 mb-2 text-center uppercase font-bold py-1 px-10 bg-blue-200 polygon">
-                    {pets[0].name}
+        <div className="font-sans mt-32 flex flex-row justify-center items-center">
+            <div className="card w-[450px] mx-auto bg-white shadow-xl hover:shadow">
+                <img
+                    className="w-32 mx-auto rounded-full -mt-20 bg-blue-100 p-2"
+                    src={logo_dark}
+                    alt="logo"
+                />
+                <div className="uppercase text-indigo-700 text-center mt-2 text-3xl font-light">
+                    {animal.name}
                 </div>
-                <div className="uppercase mb-1 text-lg font-semibold ">
-                    <span className="text-blue-800 me-3">species:</span>
-                    <span className="text-gray-700">{pets[0].species}</span>
+                <div className="text-center uppercase font-normal mt-2 text-lg">
+                    {animal.species}
                 </div>
-                <div className="uppercase mb-1 text-lg font-semibold">
-                    <span className="text-blue-800 me-3">sex:</span>
-                    <span className="text-gray-700">{pets[0].sex}</span>
+                <div className="text-center mt-2 font-light text-md">
+                    {animal.neutered ? 'Neutered' : 'Not Neutered'}
                 </div>
-                <div className="uppercase mb-1 text-lg font-semibold">
-                    <span className="text-blue-800 me-3">neutered:</span>
-                    <span className="text-gray-700">
-                        {pets[0].neutered ? 'yes' : 'no'}
-                    </span>
+                <div className="px-6 text-center font-light text-md">
+                    Date Of Birth: {animal.dateOfBirth}
                 </div>
-                <div className="uppercase mb-1 font-semibold text-lg">
-                    <span className="text-blue-800 me-3">date of birth:</span>
-                    <span className="text-gray-700">{pets[0].dateOfBirth}</span>
-                </div>
-                <div className="uppercase mb-1 font-semibold text-lg">
-                    <span className="text-blue-800 me-3">weight:</span>
-                    <span className="text-gray-700">{pets[0].weight} kg</span>
-                </div>
-                <div className="mt-2">
-                    <button
-                        className="bg-green-400 hover:scale-105 hover:bg-green-500 transition-all duration-300 text-white px-6 py-1 rounded-xl me-4">
-                        <Link to="/pet-form" className="flex items-center">
-                            <img src={edit} alt="delete" className="w-4 me-1"/>
-                            <span>Edit</span>
-                        </Link>
-                    </button>
-                    <button
-                        className="bg-red-400 hover:scale-105 hover:bg-red-500 transition-all duration-300 text-white px-6 py-1 rounded-xl me-6">
-                        <div className="flex items-center">
-                            <img src={deleteIcon} alt="delete" className="w-4 me-1"/>
-                            <span>Delete</span>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div className="flex items-center">
-                <div className="rounded-xl overflow-hidden shadow-xl mx-auto md:m-3 w-[300px]">
-                    <Carousel slides={slides}/>
+                <hr className="mt-8" />
+                <div className="flex p-4">
+                    <div className="w-1/2 flex justify-center items-center hover:cursor-pointer">
+                        <span className="mr-1.5">
+                            <img src={edit} className="w-4" alt="edit" />
+                        </span>
+                        <span>Edit</span>
+                    </div>
+                    <div className="w-0 border border-gray-300"></div>
+                    <div className="w-1/2 flex justify-center items-center hover:cursor-pointer">
+                        <span className="mr-0.5">
+                            <img
+                                src={deleteIcon}
+                                className="w-5"
+                                alt="delete"
+                            />
+                        </span>
+                        <span>Delete</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,6 +68,5 @@ function PetDetails() {
 
 export default PetDetails
 
-// <div className="max-w-[400px] rounded-xl overflow-hidden shadow-xl">
-//     <Carousel slides={slides} />
+// <Carousel slides={slides}/>
 // </div>

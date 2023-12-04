@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
         children: [
             { path: '', element: <PetList /> },
             { path: 'vets', element: <VetList /> },
-            { path: 'pet-details', element: <PetDetails /> },
+            { path: 'animals/:id', element: <PetDetails /> },
             { path: 'pet-form', element: <PetForm /> },
         ],
     },
