@@ -25,7 +25,7 @@ function PetDetails() {
         <div className="font-sans mt-32 flex flex-row justify-center items-center">
             <div className="card w-[450px] mx-auto bg-white shadow-xl hover:shadow">
                 <img
-                    className="w-32 mx-auto rounded-full -mt-20 bg-indigo-50 p-2 border-[1px] border-indigo-600"
+                    className="w-32 mx-auto rounded-full -mt-20 bg-indigo-50 p-6 border-[1px] border-indigo-600"
                     src={logo_dark}
                     alt="logo"
                 />

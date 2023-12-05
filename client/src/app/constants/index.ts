@@ -8,15 +8,37 @@ export const navLinks: NavigationLink[] = [
     {
         id: 'vets',
         title: 'Vets',
-        path: '/vets'
+        path: '/clinic/vets'
     },
     {
         id: 'pets',
         title: 'Pets',
+        path: '/clinic/'
+    },
+    {
+        id: 'shop',
+        title: 'Shop',
         path: '/'
     },
 ]
 
+export const shopNavLinks: NavigationLink[] = [
+    {
+        id: 'catalog',
+        title: 'Catalog',
+        path: '/'
+    },
+    {
+        id: 'about',
+        title: 'About',
+        path: '/about'
+    },
+    {
+        id: 'contact',
+        title: 'Contact',
+        path: '/contact'
+    },
+]
 
 export const pets = [
     {

@@ -15,7 +15,7 @@ function PetList() {
     }, [])
 
     function handleClick(id: number) {
-        navigate(`/animals/${id}`)
+        navigate(`/clinic/animals/${id}`)
     }
 
     return (
@@ -55,7 +55,7 @@ function PetList() {
                                     <img
                                         src={logo_dark}
                                         alt="pet"
-                                        className="w-16 bg-indigo-50 border-[1px] border-indigo-600 p-1 rounded-full"
+                                        className="w-20 bg-indigo-50 border-[1px] border-indigo-600 p-5 rounded-full"
                                     />
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
@@ -81,32 +81,49 @@ function PetList() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
                 {animals.map((animal) => (
                     <div
-                        className="bg-white p-4 rounded-lg shadow bg-gradient-to-tr from-white to-blue-100"
+                        className="bg-white p-4 rounded-lg shadow bg-gradient-to-tr from-white to-indigo-100"
                         key={animal.id}
                         onClick={() => handleClick(animal.id)}
                     >
                         <div className="flex items-center">
+                            {/*<img*/}
+                            {/*    src={logo_dark}*/}
+                            {/*    alt="pet"*/}
+                            {/*    className="w-20 bg-blue-100 p-1 rounded-full ms-7 sm:ms-3 me-7"*/}
+                            {/*/>*/}
                             <img
                                 src={logo_dark}
                                 alt="pet"
-                                className="w-20 bg-blue-100 p-1 rounded-full ms-7 sm:ms-3 me-7"
+                                className="w-20 bg-indigo-50 ms-7 sm:ms-3 me-7 border-[1px] border-indigo-600 p-6 rounded-full"
                             />
                             <div>
-                                <div className="text-blue-800 mb-2 text-center uppercase font-bold py-1 px-2 bg-blue-200 rounded-full">
+                                <div className="uppercase text-indigo-700 text-center mt-2 text-3xl font-light">
                                     {animal.name}
                                 </div>
-                                <div className="uppercase mb-1">
+                                <div className="text-center uppercase font-normal mt-2 text-lg">
                                     {animal.species}
                                 </div>
-                                <div className="uppercase mb-1">
-                                    {animal.neutered ? 'yes' : 'no'}
+                                <div className="text-center mt-2 font-light text-md">
+                                    {animal.neutered ? 'Neutered' : 'Not Neutered'}
                                 </div>
-                                <div className="uppercase mb-1">
-                                    {animal.dateOfBirth}
+                                <div className="px-6 text-center font-light text-md">
+                                    Date Of Birth: {animal.dateOfBirth}
                                 </div>
-                                <div className="uppercase mb-1">
-                                    {animal.weightInKilos} kg
-                                </div>
+                                {/*<div className="text-indigo-800 mb-2 text-center uppercase py-1 px-2 bg-indigo-100 rounded-full">*/}
+                                {/*    {animal.name}*/}
+                                {/*</div>*/}
+                                {/*<div className="uppercase mb-1">*/}
+                                {/*    {animal.species}*/}
+                                {/*</div>*/}
+                                {/*<div className="uppercase mb-1">*/}
+                                {/*    {animal.neutered ? 'Neutered' : 'Not Neutered'}*/}
+                                {/*</div>*/}
+                                {/*<div className="uppercase mb-1">*/}
+                                {/*    {animal.dateOfBirth}*/}
+                                {/*</div>*/}
+                                {/*<div className="uppercase mb-1">*/}
+                                {/*    {animal.weightInKilos} kg*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

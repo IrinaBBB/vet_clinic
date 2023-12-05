@@ -10,5 +10,7 @@ namespace API.Data
         }
 
         public DbSet<Animal> Animals { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
+

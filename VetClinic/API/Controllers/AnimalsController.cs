@@ -17,13 +17,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Animal>>> GetProducts()
+        public async Task<ActionResult<List<Animal>>> GetAnimals()
         {
             return await _db.Animals.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Animal>> GetProduct(int id)
+        public async Task<ActionResult<Animal>> GetAnimal(int id)
         {
             var animal = await _db.Animals.FindAsync(id);
 

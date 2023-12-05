@@ -15,6 +15,7 @@ export default {
             },
             fontFamily: {
                 montserrat: ['Montserrat', 'sans-serif'],
+                aoboshi: ['Aoboshi One', 'serif'],
             },
         },
         screens: {
