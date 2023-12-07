@@ -48,7 +48,7 @@ function PetList() {
                         {animals.map((animal) => (
                             <tr
                                 onClick={() => handleClick(animal.id)}
-                                className="even:bg-white odd:bg-gray-100 hover:bg-indigo-50"
+                                className="even:bg-white odd:bg-indigo-50 hover:bg-indigo-100"
                                 key={animal.id}
                             >
                                 <td className="p-3 text-sm text-gray-700 whitespace-nowrap flex justify-center">

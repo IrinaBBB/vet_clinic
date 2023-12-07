@@ -10,9 +10,8 @@ interface Props {
 function ProductCard({ product }: Props) {
     const navigate = useNavigate()
 
-    function handleClick() {
-        //navigate(`/animals/${id}`)
-        navigate(`/product`)
+    function handleClick(id: number) {
+        navigate(`/products/${id}`)
     }
 
     function handleClick2(e: React.MouseEvent<HTMLButtonElement>) {
@@ -23,7 +22,7 @@ function ProductCard({ product }: Props) {
 
     return (
         <div
-            onClick={() => handleClick()}
+            onClick={() => handleClick(product.id)}
             key={product.id}
             className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md hover:cursor-pointer"
         >

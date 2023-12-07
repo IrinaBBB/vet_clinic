@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AnimalsController : ControllerBase
+    public class AnimalsController : BaseApiController
     {
         private readonly AppDbContext _db;
 
