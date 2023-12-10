@@ -108,6 +108,7 @@ function LoginForm() {
                             Forgot Password ?
                         </span>
 
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a
                             href="#"
                             className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"

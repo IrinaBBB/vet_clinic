@@ -1,10 +1,13 @@
 import agent from '../../app/api/agent.ts'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Product } from '../../app/models/product.ts'
 import { useParams } from 'react-router-dom'
 import { logo_dark } from '../../assets'
+import NotFound from '../../app/errors/NotFound.tsx'
+import LoadingComponent from "../../app/components/LoadingComponent.tsx";
 
 function ProductDetails() {
+    debugger
     const { id } = useParams<{ id: string }>()
     const [product, setProduct] = useState<Product | null>(null)
     const [loading, setLoading] = useState(true)
@@ -17,8 +20,8 @@ function ProductDetails() {
                 .finally(() => setLoading(false))
     }, [id])
 
-    if (loading) return <h3>Loading...</h3>
-    if (!product) return <h3>Product not found</h3>
+    if (loading) return <LoadingComponent message='Loading product ...' />
+    if (!product) return <NotFound />
     return (
         <div className="w-full max-w-6xl rounded-xl mb-10 bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
             <div className="md:flex items-center -mx-10">
