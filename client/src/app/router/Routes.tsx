@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom'
+import {createBrowserRouter, Navigate, RouteObject} from 'react-router-dom'
 import App from '../layout/App.tsx'
 import LoginForm from '../../features/LoginForm.tsx'
 import PetList from '../../features/pets/PetList.tsx'
@@ -26,7 +26,7 @@ export const routes: RouteObject[] = [
             { path: 'contact', element: <ContactPage /> },
             { path: 'not-found', element: <NotFound /> },
             { path: 'server-error', element: <ServerError /> },
-            // { path: '*', element: <Navigate replace to="/not-found" /> },
+            { path: '*', element: <Navigate replace to="/not-found" /> },
         ],
     },
     {
@@ -38,6 +38,7 @@ export const routes: RouteObject[] = [
             { path: 'animals/:id', element: <PetDetails /> },
             { path: 'pet-form', element: <PetForm /> },
             // { path: 'catalog/:id', element: <ProductsDetails /> },
+            { path: '*', element: <Navigate replace to="/not-found" /> },
         ],
     },
     {
