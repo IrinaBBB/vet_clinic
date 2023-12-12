@@ -6,5 +6,18 @@ import hide from './hide.svg'
 import arrow from './left.svg'
 import deleteIcon from './delete.svg'
 import edit from './write.svg'
+import plus from './plus.svg'
+import minus from './minus.svg'
 
-export { logo_light, menu, logo_dark, view, hide, arrow, deleteIcon, edit }
+export {
+    logo_light,
+    menu,
+    logo_dark,
+    view,
+    hide,
+    arrow,
+    deleteIcon,
+    edit,
+    plus,
+    minus,
+}

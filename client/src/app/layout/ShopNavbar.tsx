@@ -2,13 +2,14 @@ import { logo_light, menu } from '../../assets'
 import { NavigationLink, shopNavLinks } from '../constants'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { router } from '../router/Routes.tsx'
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
         <>
             <div className="flex w-full items-center bg-gradient-to-r from-indigo-600/50 via-violet-600/50 to-indigo-600/50 py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-between">
-                <NavLink className="flex items-center border-none"  to={"/"}>
+                <NavLink className="flex items-center border-none" to={'/'}>
                     <img
                         src={logo_light}
                         alt="logo"
@@ -30,7 +31,10 @@ function Navbar() {
                         </NavLink>
                     ))}
                 </ul>
-                <div className="relative py-2 hover:cursor-pointer mt-[-10px]">
+                <div
+                    className="relative py-2 hover:cursor-pointer mt-[-10px]"
+                    onClick={() => router.navigate('/cart')}
+                >
                     <div className="t-0 absolute left-3">
                         <p className="flex h-2 w-2 items-center justify-center rounded-full bg-pink-600 p-3 text-xs text-white">
                             3

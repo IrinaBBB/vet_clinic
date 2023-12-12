@@ -16,7 +16,7 @@ function LoadingComponent({ message = 'Loading ...' }: Props) {
                     className="bg-transparent animate-bounce ease-in-out -mb-6"
                 >
                     <path
-                        className="from-purple-500/60 w-[100%]"
+                        className="from-purple-700/60 w-[100%]"
                         style={{
                             stroke: 'none',
                             strokeWidth: 1,
@@ -57,7 +57,7 @@ function LoadingComponent({ message = 'Loading ...' }: Props) {
     c7.327,14.185,10.145,29.498,7.933,43.118C106.03,274.813,99.936,284.275,90.905,288.941z"
                     />
                 </svg>
-                <div className="text-purple-500/60 uppercase tracking-wider font-light md:text-lg font-aoboshi sm:text-xs">
+                <div className="text-purple-700/60 uppercase tracking-wider font-light md:text-lg font-aoboshi sm:text-xs">
                     {message}
                 </div>
             </div>
