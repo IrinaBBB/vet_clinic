@@ -1,23 +1,29 @@
-import { useNavigate } from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 import { Product } from '../../app/models/product.ts'
 import { logo_dark } from '../../assets'
+import agent from '../../app/api/agent.ts'
+import { router } from '../../app/router/Routes.tsx'
 
 interface Props {
     product: Product
 }
 
 function ProductCard({ product }: Props) {
-    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
-    function handleClick(id: number) {
-        navigate(`/products/${id}`)
+    function handleAddItem(
+        e: React.MouseEvent<HTMLButtonElement>,
+        productId: number,
+    ) {
+        e.stopPropagation()
+        setLoading(true)
+        agent.Basket.addItem(productId)
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false))
     }
 
-    function handleClick2(e: React.MouseEvent<HTMLButtonElement>) {
-        e.stopPropagation()
-        //navigate(`/animals/${id}`)
-        navigate(`/cart`)
+    function handleClick(id: number) {
+        router.navigate(`/products/${id}`).then()
     }
 
     return (
@@ -61,9 +67,18 @@ function ProductCard({ product }: Props) {
                 <button
                     className="block w-full select-none rounded-lg bg-indigo-600/30 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="button"
-                    onClick={(e) => handleClick2(e)}
+                    onClick={(e) => handleAddItem(e, product.id)}
+                    disabled={loading}
                 >
-                    Add to Cart
+                    {!loading && <span>Add to cart</span>}
+                    {loading && (
+                        <div className="flex items-center justify-center">
+                            <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-gray-900 border-2"></div>
+                            <div className="ml-2 text-gray-900 tracking-wider">
+                                Processing...
+                            </div>
+                        </div>
+                    )}
                 </button>
             </div>
         </div>
