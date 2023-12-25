@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard.tsx'
+import ProductCard from './cart/ProductCard.tsx'
 import { useEffect, useState } from 'react'
 import { Product } from '../../app/models/product.ts'
 import agent from '../../app/api/agent.ts'

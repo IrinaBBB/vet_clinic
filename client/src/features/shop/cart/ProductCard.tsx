@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Product } from '../../app/models/product.ts'
-import { logo_dark } from '../../assets'
-import agent from '../../app/api/agent.ts'
-import { router } from '../../app/router/Routes.tsx'
+import { Product } from '../../../app/models/product.ts'
+import { logo_dark } from '../../../assets'
+import agent from '../../../app/api/agent.ts'
+import { router } from '../../../app/router/Routes.tsx'
 
 interface Props {
     product: Product

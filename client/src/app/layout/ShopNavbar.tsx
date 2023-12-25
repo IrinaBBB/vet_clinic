@@ -3,9 +3,14 @@ import { NavigationLink, shopNavLinks } from '../constants'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { router } from '../router/Routes.tsx'
+import { useAppSelector } from '../store/configureStore.ts'
 
 function Navbar() {
+    const { cart } = useAppSelector((state) => state.cart)
+    const itemCount = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
+
     const [menuOpen, setMenuOpen] = useState(false)
+
     return (
         <>
             <div className="flex w-full items-center bg-gradient-to-r from-indigo-600/50 via-violet-600/50 to-indigo-600/50 py-3 px-10 sm:px-20 font-montserrat text-white text-lg uppercase relative z-[100] justify-between sm:justify-between">
@@ -37,7 +42,7 @@ function Navbar() {
                 >
                     <div className="t-0 absolute left-3">
                         <p className="flex h-2 w-2 items-center justify-center rounded-full bg-pink-600 p-3 text-xs text-white">
-                            3
+                            {itemCount}
                         </p>
                     </div>
                     <svg

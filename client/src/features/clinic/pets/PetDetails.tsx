@@ -1,26 +1,31 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Animal } from '../../app/models/animal.ts'
-import axios from 'axios'
-import { deleteIcon, edit, logo_dark } from '../../assets'
-// import {deleteIcon, edit} from "../../assets";
-// import {Link} from "react-router-dom";
+import { useEffect } from 'react'
+import { deleteIcon, edit, logo_dark } from '../../../assets'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '../../../app/store/configureStore.ts'
+import { fetchPetAsync, petSelectors } from './petSlice.ts'
+import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
+import NotFound from '../../../app/errors/NotFound.tsx'
 
 function PetDetails() {
     const { id } = useParams<{ id: string }>()
-    const [animal, setAnimal] = useState<Animal | null>(null)
-    const [loading, setLoading] = useState(true)
+    const dispatch = useAppDispatch()
+    const pet = useAppSelector((state) =>
+        petSelectors.selectById(state, parseInt(id!)),
+    )
+    const { status: petStatus } = useAppSelector((state) => state.pets)
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:5002/api/animals/${id}`)
-            .then((response) => setAnimal(response.data))
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false))
-    }, [id])
+        if (!pet && id) dispatch(fetchPetAsync(parseInt(id)))
+    }, [id, dispatch, pet])
 
-    if (loading) return <h3>Loading...</h3>
-    if (!animal) return <h3>Pet not found</h3>
+    if (petStatus === 'pending')
+        return <LoadingComponent dark={true} message="Loading pet ..." />
+
+    if (!pet) return <NotFound />
+
     return (
         <div className="font-sans mt-32 flex flex-row justify-center items-center">
             <div className="card w-[450px] mx-auto bg-white shadow-xl hover:shadow">
@@ -30,16 +35,16 @@ function PetDetails() {
                     alt="logo"
                 />
                 <div className="uppercase text-indigo-700 text-center mt-2 text-3xl font-light">
-                    {animal.name}
+                    {pet.name}
                 </div>
                 <div className="text-center uppercase font-normal mt-2 text-lg">
-                    {animal.species}
+                    {pet.species}
                 </div>
                 <div className="text-center mt-2 font-light text-md">
-                    {animal.neutered ? 'Neutered' : 'Not Neutered'}
+                    {pet.neutered ? 'Neutered' : 'Not Neutered'}
                 </div>
                 <div className="px-6 text-center font-light text-md">
-                    Date Of Birth: {animal.dateOfBirth}
+                    Date Of Birth: {pet.dateOfBirth}
                 </div>
                 <hr className="mt-8" />
                 <div className="flex p-4">
@@ -68,5 +73,3 @@ function PetDetails() {
 
 export default PetDetails
 
-// <Carousel slides={slides}/>
-// </div>

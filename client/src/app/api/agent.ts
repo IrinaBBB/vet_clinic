@@ -55,6 +55,11 @@ const requests = {
     delete: (url: string) => axios.delete(url).then(responseBody),
 }
 
+const Pets = {
+    list: () => requests.get('animals'),
+    details: (id: number) => requests.get(`animals/${id}`),
+}
+
 const Catalog = {
     list: () => requests.get('products'),
     details: (id: number) => requests.get(`products/${id}`),
@@ -77,6 +82,7 @@ const TestErrors = {
 }
 
 const agent = {
+    Pets,
     Catalog,
     Basket,
     TestErrors,

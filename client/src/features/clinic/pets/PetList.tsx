@@ -1,22 +1,31 @@
-import { logo_dark } from '../../assets'
-import Pagination from '../../app/layout/Pagination.tsx'
+import { logo_dark } from '../../../assets'
+import Pagination from '../../../app/layout/Pagination.tsx'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Animal } from '../../app/models/animal.ts'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '../../../app/store/configureStore.ts'
+import { fetchAnimalsAsync, petSelectors } from './petSlice.ts'
+import { useEffect } from 'react'
+import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
 
 function PetList() {
-    const [animals, setAnimals] = useState<Animal[]>([])
     const navigate = useNavigate()
-
-    useEffect(() => {
-        fetch('http://localhost:5002/api/animals')
-            .then((response) => response.json())
-            .then((data) => setAnimals(data))
-    }, [])
 
     function handleClick(id: number) {
         navigate(`/clinic/animals/${id}`)
     }
+
+    const pets = useAppSelector(petSelectors.selectAll)
+    const { petsLoaded, status } = useAppSelector((state) => state.pets)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (!petsLoaded) dispatch(fetchAnimalsAsync())
+    }, [petsLoaded, dispatch])
+
+    if (status.includes('pending'))
+        return <LoadingComponent dark={true} message="Loading pets..." />
 
     return (
         <>
@@ -45,11 +54,11 @@ function PetList() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                        {animals.map((animal) => (
+                        {pets.map((pet) => (
                             <tr
-                                onClick={() => handleClick(animal.id)}
+                                onClick={() => handleClick(pet.id)}
                                 className="even:bg-white odd:bg-indigo-50 hover:bg-indigo-100"
-                                key={animal.id}
+                                key={pet.id}
                             >
                                 <td className="p-3 text-sm text-gray-700 whitespace-nowrap flex justify-center">
                                     <img
@@ -59,19 +68,19 @@ function PetList() {
                                     />
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {animal.name}
+                                    {pet.name}
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {animal.species}
+                                    {pet.species}
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {animal.dateOfBirth}
+                                    {pet.dateOfBirth}
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {animal.neutered ? 'yes' : 'no'}
+                                    {pet.neutered ? 'yes' : 'no'}
                                 </td>
                                 <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {animal.weightInKilos} kg
+                                    {pet.weightInKilos} kg
                                 </td>
                             </tr>
                         ))}
@@ -79,7 +88,7 @@ function PetList() {
                 </table>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-                {animals.map((animal) => (
+                {pets.map((animal) => (
                     <div
                         className="bg-white p-4 rounded-lg shadow bg-gradient-to-tr from-white to-indigo-100"
                         key={animal.id}
@@ -104,7 +113,9 @@ function PetList() {
                                     {animal.species}
                                 </div>
                                 <div className="text-center mt-2 font-light text-md">
-                                    {animal.neutered ? 'Neutered' : 'Not Neutered'}
+                                    {animal.neutered
+                                        ? 'Neutered'
+                                        : 'Not Neutered'}
                                 </div>
                                 <div className="px-6 text-center font-light text-md">
                                     Date Of Birth: {animal.dateOfBirth}

@@ -1,23 +1,23 @@
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom'
-import App from '../layout/App.tsx'
+import ClinicApp from '../layout/App.tsx'
 import LoginForm from '../../features/LoginForm.tsx'
-import PetList from '../../features/pets/PetList.tsx'
-import VetList from '../../features/vets/VetList.tsx'
-import PetDetails from '../../features/pets/PetDetails.tsx'
-import PetForm from '../../features/pets/PetForm.tsx'
+import PetList from '../../features/clinic/pets/PetList.tsx'
+import VetList from '../../features/clinic/vets/VetList.tsx'
+import PetDetails from '../../features/clinic/pets/PetDetails.tsx'
+import PetForm from '../../features/clinic/pets/PetForm.tsx'
 import ProductList from '../../features/shop/ProductList.tsx'
 import ProductDetails from '../../features/shop/ProductDetails.tsx'
-import Shop from '../layout/Shop.tsx'
+import ShopApp from '../layout/Shop.tsx'
 import AboutPage from '../../features/shop/AboutPage.tsx'
-import ContactPage from '../../features/shop/ContactPage.tsx'
+import ContactPage from '../../features/shop/contact/ContactPage.tsx'
 import NotFound from '../errors/NotFound.tsx'
 import ServerError from '../errors/ServerError.tsx'
-import CartPage from '../../features/shop/CartPage.tsx'
+import CartPage from '../../features/shop/cart/CartPage.tsx'
 
 export const routes: RouteObject[] = [
     {
         path: '/',
-        element: <Shop />,
+        element: <ShopApp />,
         children: [
             { path: '', element: <ProductList /> },
             { path: 'products/:id', element: <ProductDetails /> },
@@ -31,7 +31,7 @@ export const routes: RouteObject[] = [
     },
     {
         path: '/clinic',
-        element: <App />,
+        element: <ClinicApp />,
         children: [
             { path: '', element: <PetList /> },
             { path: 'vets', element: <VetList /> },
