@@ -230,6 +230,87 @@ namespace API.Data
                     context.Products.Add(product);
                 }
             }
+
+            if (!context.Vets.Any())
+            {
+                List<Vet> vetList = new List<Vet>
+            {
+                new Vet
+                {
+                    Id = 1,
+                    Name = "Dr. Alex Johnson",
+                    DateOfBirth = new DateOnly(1985, 5, 15),
+                    DateOfGraduation = new DateOnly(2010, 6, 20)
+                },
+                new Vet
+                {
+                    Id = 2,
+                    Name = "Dr. Emily Davis",
+                    DateOfBirth = new DateOnly(1988, 8, 25),
+                    DateOfGraduation = new DateOnly(2013, 7, 10)
+                },
+                new Vet
+                {
+                    Id = 3,
+                    Name = "Dr. Michael Wilson",
+                    DateOfBirth = new DateOnly(1982, 4, 10),
+                    DateOfGraduation = new DateOnly(2007, 5, 5)
+                },
+                new Vet
+                {
+                    Id = 4,
+                    Name = "Dr. Sophia Brown",
+                    DateOfBirth = new DateOnly(1987, 12, 30),
+                    DateOfGraduation = new DateOnly(2012, 3, 18)
+                },
+                new Vet
+                {
+                    Id = 5,
+                    Name = "Dr. William Martinez",
+                    DateOfBirth = new DateOnly(1984, 11, 20),
+                    DateOfGraduation = new DateOnly(2009, 8, 8)
+                },
+                new Vet
+                {
+                    Id = 6,
+                    Name = "Dr. Olivia Garcia",
+                    DateOfBirth = new DateOnly(1989, 2, 5),
+                    DateOfGraduation = new DateOnly(2014, 9, 30)
+                },
+                new Vet
+                {
+                    Id = 7,
+                    Name = "Dr. Ethan Miller",
+                    DateOfBirth = new DateOnly(1983, 10, 12),
+                    DateOfGraduation = new DateOnly(2008, 11, 22)
+                },
+                new Vet
+                {
+                    Id = 8,
+                    Name = "Dr. Ava Thompson",
+                    DateOfBirth = new DateOnly(1986, 6, 8),
+                    DateOfGraduation = new DateOnly(2011, 12, 5)
+                },
+                new Vet
+                {
+                    Id = 9,
+                    Name = "Dr. James Hernandez",
+                    DateOfBirth = new DateOnly(1990, 9, 18),
+                    DateOfGraduation = new DateOnly(2015, 4, 15)
+                },
+                new Vet
+                {
+                    Id = 10,
+                    Name = "Dr. Emma Wilson",
+                    DateOfBirth = new DateOnly(1981, 7, 22),
+                    DateOfGraduation = new DateOnly(2006, 2, 28)
+                }
+            };
+                foreach (var vet in vetList)
+                {
+                    context.Vets.Add(vet);
+                }
+            }
             context.SaveChanges();
         }
     }
