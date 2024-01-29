@@ -8,18 +8,13 @@ export const navLinks: NavigationLink[] = [
     {
         id: 'vets',
         title: 'Vets',
-        path: '/clinic/vets'
+        path: '/vets'
     },
     {
         id: 'pets',
         title: 'Pets',
-        path: '/clinic/'
-    },
-    {
-        id: 'shop',
-        title: 'Shop',
         path: '/'
-    },
+    }
 ]
 
 export const shopNavLinks: NavigationLink[] = [
