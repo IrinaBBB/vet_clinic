@@ -1,33 +1,23 @@
-import {
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/store/configureStore.ts'
-import { fetchVetsAsync } from './vetSlice.ts'
 import { useEffect } from 'react'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
 import { getVets } from '../../../app/services/apiVets.ts'
 
 function VetList() {
     // const navigate = useNavigate()
     //
-    useEffect(() => {
-        getVets().then((data) => console.log(data))
-    }, [])
 
     // function handleClick(id: number) {
     //     navigate(`/clinic/vets/${id}`)
     // }
 
-    //const vets = useAppSelector(vetSelectors.selectAll)
-    const { vetsLoaded, status } = useAppSelector((state) => state.vets)
-    const dispatch = useAppDispatch()
-
     useEffect(() => {
-        if (!vetsLoaded) dispatch(fetchVetsAsync())
-    }, [vetsLoaded, dispatch])
+        getVets().then((data) => console.log(data))
+    }, [])
 
-    if (status.includes('pending'))
-        return <LoadingComponent dark={true} message="Loading vets..." />
+
+
+
+    // if (status.includes('pending'))
+    //     return <LoadingComponent dark={true} message="Loading vets..." />
 
     return (
         <>
