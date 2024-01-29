@@ -5,14 +5,15 @@ import PetList from '../../features/clinic/pets/PetList.tsx'
 import VetList from '../../features/clinic/vets/VetList.tsx'
 import PetDetails from '../../features/clinic/pets/PetDetails.tsx'
 import PetForm from '../../features/clinic/pets/PetForm.tsx'
-import ProductList from '../../features/shop/ProductList.tsx'
-import ProductDetails from '../../features/shop/ProductDetails.tsx'
+import ProductList from '../../features/shop/products/ProductList.tsx'
+import ProductDetails from '../../features/shop/products/ProductDetails.tsx'
 import ShopApp from '../layout/Shop.tsx'
 import AboutPage from '../../features/shop/AboutPage.tsx'
 import ContactPage from '../../features/shop/contact/ContactPage.tsx'
 import NotFound from '../errors/NotFound.tsx'
 import ServerError from '../errors/ServerError.tsx'
 import CartPage from '../../features/shop/cart/CartPage.tsx'
+import VetDetails from "../../features/clinic/vets/VetDetails.tsx";
 
 export const routes: RouteObject[] = [
     {
@@ -35,9 +36,9 @@ export const routes: RouteObject[] = [
         children: [
             { path: '', element: <PetList /> },
             { path: 'vets', element: <VetList /> },
+            { path: 'vets/:id', element: <VetDetails /> },
             { path: 'animals/:id', element: <PetDetails /> },
             { path: 'pet-form', element: <PetForm /> },
-            // { path: 'catalog/:id', element: <ProductsDetails /> },
             { path: '*', element: <Navigate replace to="/not-found" /> },
         ],
     },

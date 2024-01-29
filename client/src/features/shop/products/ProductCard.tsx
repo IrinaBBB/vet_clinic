@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
 import { Product } from '../../../app/models/product.ts'
 import { logo_dark } from '../../../assets'
-import agent from '../../../app/api/agent.ts'
 import { router } from '../../../app/router/Routes.tsx'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '../../../app/store/configureStore.ts'
+import { addCartItemAsync } from '../cart/cartSlice.ts'
+import React from 'react'
 
 interface Props {
     product: Product
 }
 
 function ProductCard({ product }: Props) {
-    const [loading, setLoading] = useState(false)
+    const { status } = useAppSelector((state) => state.cart)
+    const dispatch = useAppDispatch()
 
-    function handleAddItem(
+    function handleClick(id: number) {
+        router.navigate(`/products/${id}`).then()
+    }
+
+    function addToCart(
         e: React.MouseEvent<HTMLButtonElement>,
         productId: number,
     ) {
         e.stopPropagation()
-        setLoading(true)
-        agent.Basket.addItem(productId)
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false))
-    }
-
-    function handleClick(id: number) {
-        router.navigate(`/products/${id}`).then()
+        dispatch(addCartItemAsync({ productId }))
     }
 
     return (
@@ -67,11 +69,16 @@ function ProductCard({ product }: Props) {
                 <button
                     className="block w-full select-none rounded-lg bg-indigo-600/30 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="button"
-                    onClick={(e) => handleAddItem(e, product.id)}
-                    disabled={loading}
+                    onClick={(e) =>
+                        // dispatch(addCartItemAsync({ productId: product.id }))
+                        addToCart(e, product.id)
+                    }
+                    disabled={status.includes('pendingAddItem' + product.id)}
                 >
-                    {!loading && <span>Add to cart</span>}
-                    {loading && (
+                    {!status.includes('pendingAddItem' + product.id) && (
+                        <span>Add to cart</span>
+                    )}
+                    {status.includes('pendingAddItem' + product.id) && (
                         <div className="flex items-center justify-center">
                             <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-gray-900 border-2"></div>
                             <div className="ml-2 text-gray-900 tracking-wider">

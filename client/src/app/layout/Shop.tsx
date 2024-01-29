@@ -17,7 +17,7 @@ function Shop() {
     useEffect(() => {
         const buyerId = getCookie('buyerId')
         if (buyerId) {
-            agent.Basket.get()
+            agent.Cart.get()
                 .then((cart) => dispatch(setCart(cart)))
                 .catch((error) => console.log(error))
                 .finally(() => setLoading(false))
@@ -26,7 +26,9 @@ function Shop() {
         }
     }, [dispatch])
 
-    if (loading) return <LoadingComponent message="Initializing app..." />
+    if (loading)
+        return <LoadingComponent message="Initializing app..." dark={false} />
+
     return (
         <>
             <ToastContainer

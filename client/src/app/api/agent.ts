@@ -60,16 +60,22 @@ const Pets = {
     details: (id: number) => requests.get(`animals/${id}`),
 }
 
-const Catalog = {
+const Vets = {
+    list: () => requests.get('vets'),
+    details: (id: number) => requests.get(`vets/${id}`),
+}
+
+const ProductList = {
     list: () => requests.get('products'),
     details: (id: number) => requests.get(`products/${id}`),
 }
 
-const Basket = {
+const Cart = {
     get: () => requests.get('basket'),
+    details: (id: number) => requests.get(`basket/${id}`),
     addItem: (productId: number, quantity = 1) =>
         requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
-    deleteItem: (productId: number, quantity = 1) =>
+    removeItem: (productId: number, quantity = 1) =>
         requests.delete(`basket?productId=${productId}&quantity=${quantity}`),
 }
 
@@ -83,8 +89,9 @@ const TestErrors = {
 
 const agent = {
     Pets,
-    Catalog,
-    Basket,
+    Vets,
+    ProductList,
+    Cart,
     TestErrors,
 }
 

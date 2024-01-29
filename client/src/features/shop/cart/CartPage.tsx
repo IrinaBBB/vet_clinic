@@ -1,22 +1,17 @@
 import { deleteIcon, logo_dark, minus, plus } from '../../../assets'
-import agent from '../../../app/api/agent.ts'
-import { useEffect, useState } from 'react'
-import { Cart } from '../../../app/models/Cart.ts'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '../../../app/store/configureStore.ts'
+import { addCartItemAsync, removeCartItemAsync } from './cartSlice.ts'
+import CartSummary from './CartSummary.tsx'
 
 function CartPage() {
-    const [loading, setLoading] = useState(true)
-    const [cart, setCart] = useState<Cart | null>(null)
+    const { cart, status } = useAppSelector((state) => state.cart)
+    const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        agent.Basket.get()
-            .then()
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false))
-    }, [])
+    if (!cart || cart.items.length === 0) return <h1>Your basket is empty</h1>
 
-    if (loading) return <LoadingComponent message="Loading cart..." />
-    if (!cart) return <h1>Your basket is empty</h1>
     return (
         <>
             <div className="overflow-auto shadow block rounded font-montserrat">
@@ -66,34 +61,101 @@ function CartPage() {
                                     </span>
                                 </td>
                                 <td className="text-gray-700 p-2 whitespace-nowrap text-center">
-                                    {cartItem.price}
+                                    {cartItem.price}kr
                                 </td>
                                 <td className="text-gray-700 p-2 whitespace-nowrap text-center">
                                     <span className="flex justify-center">
-                                        <img
-                                            src={plus}
-                                            alt="delete"
-                                            className="w-6 h-6 bg-green-100 hover:bg-green-300 p-2 border-purple-600 rounded me-3 hover:cursor-pointer"
-                                        />
+                                        {status ===
+                                        'pendingRemoveItem' +
+                                            cartItem.productId +
+                                            'remove' ? (
+                                            <button
+                                                className="w-6 h-6 flex justify-center items-center bg-red-100 me-3 border-purple-600 rounded"
+                                                disabled={true}
+                                            >
+                                                <div className="h-3 w-3 border-t-transparent border-solid animate-spin rounded-full border-gray-400/50 border-2"></div>
+                                            </button>
+                                        ) : (
+                                            <img
+                                                src={minus}
+                                                alt="delete"
+                                                className="w-6 h-6 me-3 bg-red-100 hover:bg-red-300 p-2 border-purple-600 rounded  hover:cursor-pointer"
+                                                onClick={() =>
+                                                    dispatch(
+                                                        removeCartItemAsync({
+                                                            productId:
+                                                                cartItem.productId,
+                                                            quantity: 1,
+                                                            name: 'remove',
+                                                        }),
+                                                    )
+                                                }
+                                            />
+                                        )}
                                         <span className="font-bold">
                                             {cartItem.quantity}
                                         </span>
-                                        <img
-                                            src={minus}
-                                            alt="delete"
-                                            className="w-6 h-6 bg-red-100 hover:bg-red-300 p-2 border-purple-600 rounded ms-3 hover:cursor-pointer"
-                                        />
+                                        {status ===
+                                        'pendingAddItem' +
+                                            cartItem.productId ? (
+                                            <button
+                                                className="w-6 h-6 flex justify-center items-center bg-green-100 ms-3 border-purple-600 rounded"
+                                                disabled={true}
+                                            >
+                                                <div className="h-3 w-3 border-t-transparent border-solid animate-spin rounded-full border-gray-400/50 border-2"></div>
+                                            </button>
+                                        ) : (
+                                            <img
+                                                onClick={() =>
+                                                    dispatch(
+                                                        addCartItemAsync({
+                                                            productId:
+                                                                cartItem.productId,
+                                                        }),
+                                                    )
+                                                }
+                                                src={plus}
+                                                alt="delete"
+                                                className="w-6 h-6 bg-green-100 hover:bg-green-300 ms-3 p-2 border-purple-600 rounded hover:cursor-pointer"
+                                            />
+                                        )}
                                     </span>
                                 </td>
                                 <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    subtotal
+
+                                    {(
+                                        cartItem.price * cartItem.quantity
+                                    ).toFixed(2)}kr
                                 </td>
                                 <td className="text-gray-700 p-2 whitespace-nowrap hover:cursor-pointer">
-                                    <img
-                                        src={deleteIcon}
-                                        alt="delete"
-                                        className="w-10 h-10 bg-red-100 hover:bg-red-300 p-3 border-purple-600 rounded-full"
-                                    />
+                                    {status ===
+                                    'pendingRemoveItem' +
+                                        cartItem.productId +
+                                        'delete' ? (
+                                        <button
+                                            className="w-10 h-10 bg-red-100 flex items-center justify-center border-purple-600 rounded-full"
+                                            disabled={true}
+                                        >
+                                            <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-gray-400/50 border-2"></div>
+                                        </button>
+                                    ) : (
+                                        <img
+                                            onClick={() =>
+                                                dispatch(
+                                                    removeCartItemAsync({
+                                                        productId:
+                                                            cartItem.productId,
+                                                        quantity:
+                                                            cartItem.quantity,
+                                                        name: 'delete',
+                                                    }),
+                                                )
+                                            }
+                                            src={deleteIcon}
+                                            alt="delete"
+                                            className="w-10 h-10 bg-red-100 hover:bg-red-300 p-3 border-purple-600 rounded-full"
+                                        />
+                                    )}
                                 </td>
                             </tr>
                         ))}
@@ -102,45 +164,7 @@ function CartPage() {
             </div>
             <div className="grid grid-cols-2">
                 <div></div>
-                <div className="overflow-hidden rounded block font-montserrat mt-2">
-                    <table className="w-full shadow">
-                        <tbody className="divide-y divide-gray-300">
-                            <tr className="bg-white">
-                                <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    <span className="ms-2">Subtotal</span>
-                                </td>
-                                <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    12
-                                </td>
-                            </tr>
-                            <tr className="bg-white">
-                                <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    <span className="ms-2">Delivery Fee*</span>
-                                </td>
-                                <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    12
-                                </td>
-                            </tr>
-                            <tr className="bg-purple-50">
-                                <td className="text-gray-700 font-bold p-3 whitespace-nowrap">
-                                    <span className="ms-2">Total</span>
-                                </td>
-                                <td className="text-gray-700 p-2 whitespace-nowrap">
-                                    123
-                                </td>
-                            </tr>
-                            <tr className="bg-white">
-                                <td className="text-gray-700 p-2 text-sm italic whitespace-nowrap">
-                                    *Orders over $100 qualify for free delivery
-                                </td>
-                                <td className="text-gray-700 p-2 whitespace-nowrap"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button className="mt-2 py-2 shadow rounded uppercase text-white bg-purple-600/60 hover:bg-purple-600/90 w-full">
-                        Checkout
-                    </button>
-                </div>
+                <CartSummary />
             </div>
         </>
     )

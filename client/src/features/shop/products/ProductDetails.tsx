@@ -1,26 +1,26 @@
-import agent from '../../app/api/agent.ts'
+import agent from '../../../app/api/agent.ts'
 import { useEffect, useState } from 'react'
-import { Product } from '../../app/models/product.ts'
+import { Product } from '../../../app/models/product.ts'
 import { useParams } from 'react-router-dom'
-import { logo_dark } from '../../assets'
-import NotFound from '../../app/errors/NotFound.tsx'
-import LoadingComponent from "../../app/components/LoadingComponent.tsx";
+import { logo_dark } from '../../../assets'
+import NotFound from '../../../app/errors/NotFound.tsx'
+import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
 
 function ProductDetails() {
-    debugger
     const { id } = useParams<{ id: string }>()
     const [product, setProduct] = useState<Product | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         id &&
-            agent.Catalog.details(parseInt(id))
+            agent.ProductList.details(parseInt(id))
                 .then((response) => setProduct(response))
                 .catch((error) => console.log(error))
                 .finally(() => setLoading(false))
     }, [id])
 
-    if (loading) return <LoadingComponent message='Loading product ...' />
+    if (loading)
+        return <LoadingComponent dark={false} message="Loading product ..." />
     if (!product) return <NotFound />
     return (
         <div className="w-full max-w-6xl rounded-xl mb-10 bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
