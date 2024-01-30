@@ -1,4 +1,4 @@
-import { deleteIcon, edit, logo_dark } from '../../../assets'
+import { deleteIcon, edit, logo_dark } from '../../assets'
 
 function PetDetails() {
     const pet = {name: 'Lasie', species: 'dog', }

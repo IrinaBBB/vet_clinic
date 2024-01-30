@@ -1,11 +1,11 @@
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom'
 import ClinicApp from '../layout/App.tsx'
 import LoginForm from '../../features/LoginForm.tsx'
-import PetList from '../../features/clinic/pets/PetList.tsx'
-import VetList from '../../features/clinic/vets/VetList.tsx'
-import PetDetails from '../../features/clinic/pets/PetDetails.tsx'
-import PetForm from '../../features/clinic/pets/PetForm.tsx'
-import VetDetails from '../../features/clinic/vets/VetDetails.tsx'
+import PetList from '../../features/pets/PetList.tsx'
+import VetList from '../../features/vets/VetList.tsx'
+import PetDetails from '../../features/pets/PetDetails.tsx'
+import PetForm from '../../features/pets/PetForm.tsx'
+import VetDetails from '../../features/vets/VetDetails.tsx'
 
 export const routes: RouteObject[] = [
     {

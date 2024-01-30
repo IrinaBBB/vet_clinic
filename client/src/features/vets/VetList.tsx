@@ -1,8 +1,8 @@
-import { getVets } from '../../../app/services/apiVets.ts'
+import { getVets } from '../../app/services/apiVets.ts'
 import { useQuery } from '@tanstack/react-query'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
+import LoadingComponent from '../../app/components/LoadingComponent.tsx'
 import { useNavigate } from 'react-router-dom'
-import Pagination from '../../../app/layout/Pagination.tsx'
+import Pagination from '../../app/layout/Pagination.tsx'
 import { LuInfo, LuPen, LuTrash2 } from 'react-icons/lu'
 
 function VetList() {

@@ -1,4 +1,4 @@
-import { deleteIcon, edit } from '../../../assets'
+import { deleteIcon, edit } from '../../assets'
 
 function VetDetails() {
     const vet = {

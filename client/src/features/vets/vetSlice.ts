@@ -3,7 +3,7 @@ import {
     createEntityAdapter,
     createSlice,
 } from '@reduxjs/toolkit'
-import { Vet } from '../../../app/models/vet.ts'
+import { Vet } from '../../app/models/vet.ts'
 import agent from '../../../app/api/agent.ts'
 import { RootState } from '../../../app/store/configureStore.ts'
 

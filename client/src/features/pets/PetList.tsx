@@ -1,9 +1,9 @@
-import { logo_dark } from '../../../assets'
-import Pagination from '../../../app/layout/Pagination.tsx'
+import { logo_dark } from '../../assets'
+import Pagination from '../../app/layout/Pagination.tsx'
 import { useNavigate } from 'react-router-dom'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
+import LoadingComponent from '../../app/components/LoadingComponent.tsx'
 import { useQuery } from '@tanstack/react-query'
-import { getPets } from '../../../app/services/apiPets.ts'
+import { getPets } from '../../app/services/apiPets.ts'
 import { LuInfo, LuPen, LuTrash2 } from 'react-icons/lu'
 
 function PetList() {
