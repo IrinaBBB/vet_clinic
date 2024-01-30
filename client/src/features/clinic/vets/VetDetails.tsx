@@ -1,30 +1,16 @@
-import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { deleteIcon, edit } from '../../../assets'
-import {
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/store/configureStore.ts'
-import { fetchVetAsync, vetSelectors } from './vetSlice.ts'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
-import NotFound from '../../../app/errors/NotFound.tsx'
 
 function VetDetails() {
-    const { id } = useParams<{ id: string }>()
-    const dispatch = useAppDispatch()
-    const vet = useAppSelector((state) =>
-        vetSelectors.selectById(state, parseInt(id!)),
-    )
-    const { status: vetStatus } = useAppSelector((state) => state.vets)
+    const vet = {
+        name: 'Hello',
+        dateOfBirth: '1999-11-12',
+        dateOfGraduation: '2003-11-12',
+    }
 
-    useEffect(() => {
-        if (!vet && id) dispatch(fetchVetAsync(parseInt(id)))
-    }, [id, dispatch, vet])
+    // if (vetStatus === 'pending')
+    //     return <LoadingComponent dark={true} message="Loading vet ..." />
 
-    if (vetStatus === 'pending')
-        return <LoadingComponent dark={true} message="Loading vet ..." />
-
-    if (!vet) return <NotFound />
+    // if (!vet) return <NotFound />
 
     return (
         <div className="font-sans mt-32 flex flex-row justify-center items-center">

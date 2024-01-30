@@ -1,30 +1,12 @@
-import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { deleteIcon, edit, logo_dark } from '../../../assets'
-import {
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/store/configureStore.ts'
-import { fetchPetAsync, petSelectors } from './petSlice.ts'
-import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
-import NotFound from '../../../app/errors/NotFound.tsx'
 
 function PetDetails() {
-    const { id } = useParams<{ id: string }>()
-    const dispatch = useAppDispatch()
-    const pet = useAppSelector((state) =>
-        petSelectors.selectById(state, parseInt(id!)),
-    )
-    const { status: petStatus } = useAppSelector((state) => state.pets)
+    const pet = {name: 'Lasie', species: 'dog', }
 
-    useEffect(() => {
-        if (!pet && id) dispatch(fetchPetAsync(parseInt(id)))
-    }, [id, dispatch, pet])
+    // if (petStatus === 'pending')
+    //     return <LoadingComponent dark={true} message="Loading pet ..." />
 
-    if (petStatus === 'pending')
-        return <LoadingComponent dark={true} message="Loading pet ..." />
-
-    if (!pet) return <NotFound />
+    // if (!pet) return <NotFound />
 
     return (
         <div className="font-sans mt-32 flex flex-row justify-center items-center">
@@ -39,12 +21,6 @@ function PetDetails() {
                 </div>
                 <div className="text-center uppercase font-normal mt-2 text-lg">
                     {pet.species}
-                </div>
-                <div className="text-center mt-2 font-light text-md">
-                    {pet.neutered ? 'Neutered' : 'Not Neutered'}
-                </div>
-                <div className="px-6 text-center font-light text-md">
-                    Date Of Birth: {pet.dateOfBirth}
                 </div>
                 <hr className="mt-8" />
                 <div className="flex p-4">
