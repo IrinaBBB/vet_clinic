@@ -1,98 +1,87 @@
-import { logo_dark } from '../../../assets'
+import {logo_dark} from '../../../assets'
 import Pagination from '../../../app/layout/Pagination.tsx'
-import { useNavigate } from 'react-router-dom'
-import {
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/store/configureStore.ts'
-import { fetchAnimalsAsync, petSelectors } from './petSlice.ts'
-import { useEffect } from 'react'
+import {useNavigate} from 'react-router-dom'
 import LoadingComponent from '../../../app/components/LoadingComponent.tsx'
+import {getVets} from '../../../app/services/apiVets.ts'
+import {useQuery} from '@tanstack/react-query'
+import {getPets} from '../../../app/services/apiPets.ts'
 
 function PetList() {
     const navigate = useNavigate()
 
     function handleClick(id: number) {
-        navigate(`/clinic/animals/${id}`)
+        navigate(`/animals/${id}`)
     }
 
-    const pets = useAppSelector(petSelectors.selectAll)
-    const { petsLoaded, status } = useAppSelector((state) => state.pets)
-    const dispatch = useAppDispatch()
+    const {
+        isLoading,
+        data: pets,
+        error,
+    } = useQuery({queryKey: ['animals'], queryFn: getPets})
 
-    useEffect(() => {
-        if (!petsLoaded) dispatch(fetchAnimalsAsync())
-    }, [petsLoaded, dispatch])
-
-    if (status.includes('pending'))
-        return <LoadingComponent dark={true} message="Loading pets..." />
+    if (isLoading)
+        return <LoadingComponent dark={true} message="Loading pets..."/>
 
     return (
         <>
             <div className="overflow-auto rounded-lg shadow hidden md:block font-montserrat">
                 <table className="w-full">
                     <thead className="bg-gray-50 border-b-2 border-gray-200 text-blue-800 uppercase">
-                        <tr>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                &nbsp;
-                            </th>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                Name
-                            </th>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                Species
-                            </th>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                Date of Birth
-                            </th>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                Neutered
-                            </th>
-                            <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
-                                Weight
-                            </th>
-                        </tr>
+                    <tr>
+                        <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
+                            &nbsp;
+                        </th>
+                        <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
+                            Name
+                        </th>
+                        <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
+                            Species
+                        </th>
+                        <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
+                            Breed
+                        </th>
+                        <th className="p-3 text-sm font-semibold tracking-wide text-start whitespace-nowrap">
+                            Age
+                        </th>
+                    </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                        {pets.map((pet) => (
-                            <tr
-                                onClick={() => handleClick(pet.id)}
-                                className="even:bg-white odd:bg-indigo-50 hover:bg-indigo-100"
-                                key={pet.id}
-                            >
-                                <td className="p-3 text-sm text-gray-700 whitespace-nowrap flex justify-center">
-                                    <img
-                                        src={logo_dark}
-                                        alt="pet"
-                                        className="w-20 bg-indigo-50 border-[1px] border-indigo-600 p-5 rounded-full"
-                                    />
-                                </td>
-                                <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {pet.name}
-                                </td>
-                                <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {pet.species}
-                                </td>
-                                <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {pet.dateOfBirth}
-                                </td>
-                                <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {pet.neutered ? 'yes' : 'no'}
-                                </td>
-                                <td className="p-3 text-gray-700 whitespace-nowrap">
-                                    {pet.weightInKilos} kg
-                                </td>
-                            </tr>
-                        ))}
+                    {pets.map((pet) => (
+                        <tr
+                            onClick={() => handleClick(pet.id)}
+                            className="even:bg-white odd:bg-indigo-50 hover:bg-indigo-100"
+                            key={pet.id}
+                        >
+                            <td className="p-3 text-sm text-gray-700 whitespace-nowrap flex justify-center">
+                                <img
+                                    src={logo_dark}
+                                    alt="pet"
+                                    className="w-20 bg-indigo-50 border-[1px] border-indigo-600 p-5 rounded-full"
+                                />
+                            </td>
+                            <td className="p-3 text-gray-700 whitespace-nowrap">
+                                {pet.name}
+                            </td>
+                            <td className="p-3 text-gray-700 whitespace-nowrap">
+                                {pet.species}
+                            </td>
+                            <td className="p-3 text-gray-700 whitespace-nowrap">
+                                {pet.breed}
+                            </td>
+                            <td className="p-3 text-gray-700 whitespace-nowrap">
+                                {pet.age}
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-                {pets.map((animal) => (
+                {pets.map((pet) => (
                     <div
                         className="bg-white p-4 rounded-lg shadow bg-gradient-to-tr from-white to-indigo-100"
-                        key={animal.id}
-                        onClick={() => handleClick(animal.id)}
+                        key={pet.id}
+                        onClick={() => handleClick(pet.id)}
                     >
                         <div className="flex items-center">
                             {/*<img*/}
@@ -107,18 +96,16 @@ function PetList() {
                             />
                             <div>
                                 <div className="uppercase text-indigo-700 text-center mt-2 text-3xl font-light">
-                                    {animal.name}
+                                    {pet.name}
                                 </div>
                                 <div className="text-center uppercase font-normal mt-2 text-lg">
-                                    {animal.species}
+                                    {pet.species}
                                 </div>
                                 <div className="text-center mt-2 font-light text-md">
-                                    {animal.neutered
-                                        ? 'Neutered'
-                                        : 'Not Neutered'}
+                                    {pet.neutered ? 'Neutered' : 'Not Neutered'}
                                 </div>
                                 <div className="px-6 text-center font-light text-md">
-                                    Date Of Birth: {animal.dateOfBirth}
+                                    Date Of Birth: {pet.dateOfBirth}
                                 </div>
                                 {/*<div className="text-indigo-800 mb-2 text-center uppercase py-1 px-2 bg-indigo-100 rounded-full">*/}
                                 {/*    {animal.name}*/}
@@ -138,9 +125,9 @@ function PetList() {
                             </div>
                         </div>
                     </div>
-                ))}
+                    ))}
             </div>
-            <Pagination />
+            <Pagination/>
         </>
     )
 }
