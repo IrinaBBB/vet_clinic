@@ -6,12 +6,12 @@ namespace API.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            if (!context.Animals.Any())
+            if (!context.Pets.Any())
             {
 
-                var animals = new List<Animal>
+                var Pets = new List<Pet>
             {
-                new Animal
+                new Pet
                 {
                     Id = 1,
                     Name = "Max",
@@ -20,7 +20,7 @@ namespace API.Data
                     WeightInKilos = 10.5m,
                     Species = "Dog"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 2,
                     Name = "Luna",
@@ -29,7 +29,7 @@ namespace API.Data
                     WeightInKilos = 7.8m,
                     Species = "Cat"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 3,
                     Name = "Buddy",
@@ -38,8 +38,7 @@ namespace API.Data
                     WeightInKilos = 5.2m,
                     Species = "Dog"
                 },
-                // Additional animals
-                new Animal
+                new Pet
                 {
                     Id = 4,
                     Name = "Fluffy",
@@ -48,7 +47,7 @@ namespace API.Data
                     WeightInKilos = 4.3m,
                     Species = "Rabbit"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 5,
                     Name = "Whiskers",
@@ -57,7 +56,7 @@ namespace API.Data
                     WeightInKilos = 3.1m,
                     Species = "Cat"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 6,
                     Name = "Rocky",
@@ -66,7 +65,7 @@ namespace API.Data
                     WeightInKilos = 8.9m,
                     Species = "Dog"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 7,
                     Name = "Kiwi",
@@ -75,7 +74,7 @@ namespace API.Data
                     WeightInKilos = 1.5m,
                     Species = "Bird"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 8,
                     Name = "Spike",
@@ -84,7 +83,7 @@ namespace API.Data
                     WeightInKilos = 6.7m,
                     Species = "Hedgehog"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 9,
                     Name = "Bubbles",
@@ -93,7 +92,7 @@ namespace API.Data
                     WeightInKilos = 0.9m,
                     Species = "Fish"
                 },
-                new Animal
+                new Pet
                 {
                     Id = 10,
                     Name = "Coco",
@@ -104,133 +103,13 @@ namespace API.Data
                 }
             };
 
-                foreach (var animal in animals)
+                foreach (var Pet in Pets)
                 {
-                    context.Animals.Add(animal);
+                    context.Pets.Add(Pet);
                 }
             }
 
-            if (!context.Products.Any())
-            {
-                var productList = new List<Product>
-            {
-                    new Product
-                    {
-                        Id = 1,
-                        Name = "Premium Dog Food",
-                        Description = "High-quality food for dogs",
-                        Price = 320,
-                        PictureUrl = "https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?q=80&w=3873&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Food",
-                        Brand = "PremiumPets",
-                        QuantityInStock = 50
-                    },
-                    new Product
-                    {
-                        Id = 2,
-                        Name = "Catnip Toy",
-                        Description = "Interactive toy for cats",
-                        Price = 100,
-                        PictureUrl = "https://images.unsplash.com/photo-1644509875735-694634983f40?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Toy",
-                        Brand = "MeowPlay",
-                        QuantityInStock = 30
-                    },
-                    new Product
-                    {
-                        Id = 3,
-                        Name = "Bird Cage",
-                        Description = "Spacious cage for birds",
-                        Price = 2999,
-                        PictureUrl = "https://images.unsplash.com/photo-1587019572196-567a60231f1f?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Accessories",
-                        Brand = "Aviary Haven",
-                        QuantityInStock = 20
-                    },
-                    new Product
-                    {
-                        Id = 4,
-                        Name = "Fish Tank",
-                        Description = "Aquarium for fish",
-                        Price = 2499,
-                        PictureUrl = "https://images.unsplash.com/photo-1550479125-d6ec537f108e?q=80&w=3527&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Aquarium",
-                        Brand = "AquaWorld",
-                        QuantityInStock = 15
-                    },
-                    new Product
-                    {
-                        Id = 5,
-                        Name = "Small Animal Bedding",
-                        Description = "Comfortable bedding for small animals",
-                        Price = 999,
-                        PictureUrl = "",
-                        Type = "Bedding",
-                        Brand = "CozyNest",
-                        QuantityInStock = 40
-                    },
-                    new Product
-                    {
-                        Id = 6,
-                        Name = "Reptile Heat Lamp",
-                        Description = "Heat lamp for reptiles",
-                        Price = 1499,
-                        PictureUrl = "",
-                        Type = "Heating",
-                        Brand = "WarmWorld",
-                        QuantityInStock = 25
-                    },
-                    new Product
-                    {
-                        Id = 7,
-                        Name = "Hamster Wheel",
-                        Description = "Exercise wheel for hamsters",
-                        Price = 599,
-                        PictureUrl = "https://images.unsplash.com/photo-1657076761228-bdb21cf0bc7c?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Toy",
-                        Brand = "RunFast",
-                        QuantityInStock = 35
-                    },
-                    new Product
-                    {
-                        Id = 8,
-                        Name = "Turtle Food",
-                        Description = "Specialized food for turtles",
-                        Price = 1299,
-                        PictureUrl = "",
-                        Type = "Food",
-                        Brand = "ShellFeast",
-                        QuantityInStock = 30
-                    },
-                    new Product
-                    {
-                        Id = 9,
-                        Name = "Rabbit Hutch",
-                        Description = "Hutch for rabbits",
-                        Price = 3499,
-                        PictureUrl = "",
-                        Type = "Housing",
-                        Brand = "BunnyHaven",
-                        QuantityInStock = 10
-                    },
-                    new Product
-                    {
-                        Id = 10,
-                        Name = "Grooming Kit",
-                        Description = "Kit for pet grooming",
-                        Price = 1999,
-                        PictureUrl = "https://images.unsplash.com/photo-1625321171045-1fea4ac688e9?q=80&w=3871&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        Type = "Accessories",
-                        Brand = "GroomMaster",
-                        QuantityInStock = 25
-                    }
-        };
-                foreach (var product in productList)
-                {
-                    context.Products.Add(product);
-                }
-            }
-
+         
             if (!context.Vets.Any())
             {
                 List<Vet> vetList = new List<Vet>

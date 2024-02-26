@@ -1,22 +1,36 @@
 import { deleteIcon, edit } from '../../assets'
+import { useParams } from 'react-router-dom'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '../../app/store/configureStore.ts'
+import { useEffect } from 'react'
+import LoadingComponent from '../../app/components/LoadingComponent.tsx'
+import NotFound from '../../app/errors/NotFound.tsx'
+import {fetchVetAsync, vetSelectors} from "./vetSlice.ts";
 
 function VetDetails() {
-    const vet = {
-        name: 'Hello',
-        dateOfBirth: '1999-11-12',
-        dateOfGraduation: '2003-11-12',
-    }
+    const { id } = useParams<{ id: string }>()
+    const dispatch = useAppDispatch()
+    const vet = useAppSelector((state) =>
+        vetSelectors.selectById(state, parseInt(id!)),
+    )
+    const { status: vetStatus } = useAppSelector((state) => state.vets)
 
-    // if (vetStatus === 'pending')
-    //     return <LoadingComponent dark={true} message="Loading vet ..." />
+    useEffect(() => {
+        if (!vet && id) dispatch(fetchVetAsync(parseInt(id)))
+    }, [id, vet, dispatch])
 
-    // if (!vet) return <NotFound />
+    if (vetStatus.includes('pending'))
+        return <LoadingComponent message="Loading product..." dark={true} />
+
+    if (!vet) return <NotFound />
 
     return (
         <div className="font-sans mt-32 flex flex-row justify-center items-center">
-            <div className="card w-[450px] mx-auto bg-white shadow-xl hover:shadow">
+            <div className="card w-[450px] mx-auto bg-white shadow-xl">
                 <svg
-                    className="w-32 shadow h-32 text-indigo-600 mx-auto rounded-full -mt-20 bg-indigo-50 p-3 border-[1px] border-indigo-600"
+                    className="w-32 shadow-xl h-32 text-indigo-600 mx-auto rounded-full -mt-20 bg-indigo-50 p-3 border-[1px] border-indigo-600"
                     fill="currentColor"
                     viewBox="0 -150 500 800"
                     xmlns="http://www.w3.org/2000/svg"
@@ -38,13 +52,13 @@ function VetDetails() {
                 <div className="text-center font-light text-md mt-8">
                     <span className="uppercase block">Date Of Birth:</span>{' '}
                     <span className="text-xl text-indigo-600">
-                        {vet.dateOfBirth}
+                        {vet.dateOfBirth.toString()}
                     </span>
                 </div>
                 <div className="text-center mt-2 font-light text-md">
                     <span className="uppercase block">Date Of Graduation:</span>{' '}
                     <span className="text-xl text-indigo-600">
-                        {vet.dateOfGraduation}
+                        {vet.dateOfGraduation.toString()}
                     </span>
                 </div>
                 <hr className="mt-8" />

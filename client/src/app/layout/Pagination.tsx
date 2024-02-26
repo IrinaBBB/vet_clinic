@@ -5,7 +5,7 @@ function Pagination() {
 
     return (
         <>
-            <ul className="flex justify-end items-center mt-4 me-3 last:me-0">
+            <ul className="flex justify-end items-center mt-4 me-3 last:me-0 mb-10">
                 <li className="hover:scale-125 transition-all duration-200">
                     <img
                         src={arrow}
@@ -16,7 +16,7 @@ function Pagination() {
                 <li>
                     <ul className="flex justify-center items-center">
                         {paginationNumbers.map((number) => (
-                            <li key={number} className="me-3 last:me-0 relative p-4 bg-gradient-to-r from-indigo-700 to-blue-700 rounded-full cursor-pointer hover:scale-125 transition-all duration-200">
+                            <li key={number} className="me-3 last:me-0 relative p-4 bg-gradient-to-r from-indigo-700/80 to-indigo-600/80 rounded-full cursor-pointer hover:scale-125 transition-all duration-200">
                                 <span className="font-montserrat text-white font-bold absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                                     {number}
                                 </span>

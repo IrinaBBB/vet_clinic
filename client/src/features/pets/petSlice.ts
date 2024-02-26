@@ -1,16 +1,12 @@
-import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-} from '@reduxjs/toolkit'
-import { Animal } from '../../app/models/animal.ts'
-import agent from '../../../app/api/agent.ts'
-import { RootState } from '../../../app/store/configureStore.ts'
+import {createAsyncThunk, createEntityAdapter, createSlice} from '@reduxjs/toolkit'
+import { Pet } from '../../app/models/pet.ts'
+import agent from '../../app/api/agent.ts'
+import {RootState} from "../../app/store/configureStore.ts";
 
-const petsAdapter = createEntityAdapter<Animal>()
+const petsAdapter = createEntityAdapter<Pet>()
 
-export const fetchAnimalsAsync = createAsyncThunk<Animal[]>(
-    'pets/fetchProductsAsync',
+export const fetchPetsAsync = createAsyncThunk<Pet[]>(
+    'pets/fetchPetsAsync',
     async (_, thunkAPI) => {
         try {
             return await agent.Pets.list()
@@ -20,8 +16,8 @@ export const fetchAnimalsAsync = createAsyncThunk<Animal[]>(
     },
 )
 
-export const fetchPetAsync = createAsyncThunk<Animal, number>(
-    'catalog/fetchPetAsync',
+export const fetchPetAsync = createAsyncThunk<Pet, number>(
+    'pets/fetchPetAsync',
     async (petId, thunkAPI) => {
         try {
             return await agent.Pets.details(petId)
@@ -31,6 +27,7 @@ export const fetchPetAsync = createAsyncThunk<Animal, number>(
     },
 )
 
+
 export const petSlice = createSlice({
     name: 'pets',
     initialState: petsAdapter.getInitialState({
@@ -38,31 +35,31 @@ export const petSlice = createSlice({
         status: 'idle',
     }),
     reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchAnimalsAsync.pending, (state) => {
+    extraReducers: (builder => {
+        builder.addCase(fetchPetsAsync.pending, (state) => {
             state.status = 'pendingFetchPets'
         })
-        builder.addCase(fetchAnimalsAsync.fulfilled, (state, action) => {
+        builder.addCase(fetchPetsAsync.fulfilled, (state, action) => {
             petsAdapter.setAll(state, action.payload)
             state.status = 'idle'
             state.petsLoaded = true
         })
-        builder.addCase(fetchAnimalsAsync.rejected, (state) => {
+        builder.addCase(fetchPetsAsync.rejected, (state, action) => {
+            console.log(action.payload)
             state.status = 'idle'
         })
         builder.addCase(fetchPetAsync.pending, (state) => {
-            state.status = 'pendingFetchProduct'
+            state.status = 'pendingFetchPet'
         })
         builder.addCase(fetchPetAsync.fulfilled, (state, action) => {
             petsAdapter.upsertOne(state, action.payload)
             state.status = 'idle'
         })
-        builder.addCase(fetchPetAsync.rejected, (state) => {
+        builder.addCase(fetchPetAsync.rejected, (state, action) => {
+            console.log(action)
             state.status = 'idle'
         })
-    },
+    }),
 })
 
-export const petSelectors = petsAdapter.getSelectors(
-    (state: RootState) => state.pets,
-)
+export const petSelectors = petsAdapter.getSelectors((state: RootState) => state.pets)

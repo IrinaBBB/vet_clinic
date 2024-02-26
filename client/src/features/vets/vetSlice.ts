@@ -4,13 +4,13 @@ import {
     createSlice,
 } from '@reduxjs/toolkit'
 import { Vet } from '../../app/models/vet.ts'
-import agent from '../../../app/api/agent.ts'
-import { RootState } from '../../../app/store/configureStore.ts'
+import agent from '../../app/api/agent.ts'
+import { RootState } from '../../app/store/configureStore.ts'
 
 const vetsAdapter = createEntityAdapter<Vet>()
 
 export const fetchVetsAsync = createAsyncThunk<Vet[]>(
-    'vets/fetchProductsAsync',
+    'vets/fetchVetsAsync',
     async (_, thunkAPI) => {
         try {
             return await agent.Vets.list()
@@ -47,17 +47,19 @@ export const vetSlice = createSlice({
             state.status = 'idle'
             state.vetsLoaded = true
         })
-        builder.addCase(fetchVetsAsync.rejected, (state) => {
+        builder.addCase(fetchVetsAsync.rejected, (state, action) => {
+            console.log(action.payload)
             state.status = 'idle'
         })
         builder.addCase(fetchVetAsync.pending, (state) => {
-            state.status = 'pendingFetchProduct'
+            state.status = 'pendingFetchVet'
         })
         builder.addCase(fetchVetAsync.fulfilled, (state, action) => {
             vetsAdapter.upsertOne(state, action.payload)
             state.status = 'idle'
         })
-        builder.addCase(fetchVetAsync.rejected, (state) => {
+        builder.addCase(fetchVetAsync.rejected, (state, action) => {
+            console.log(action)
             state.status = 'idle'
         })
     },

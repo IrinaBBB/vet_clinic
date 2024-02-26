@@ -2,7 +2,7 @@
 
 namespace API.Entities
 {
-    public class Animal
+    public class Pet
     {
         public int Id { get; set; }
 
